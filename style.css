@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    
+}
+.page{
+    width:75vw;
+    height: 200vh;
+   
+    padding:50px;
+    background-color: blanchedalmond;
+    border-radius: 20px;
+    border: 1px solid black;
+} 
+.g{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+    padding-top: 10px;
+}
+.footer{
+    align-items: center;
+    width: 75vw;
+    height: 10vw;
+    
+    background-color: brown;
+    color: white;
+}
