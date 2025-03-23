@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Expense Tracker</h1>
+        
+        <!-- Balance Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl text-gray-600">Current Balance</h2>
+                    <p id="balance" class="text-3xl font-bold text-gray-800">$0.00</p>
+                </div>
+                <div class="text-right">
+                    <h2 class="text-xl text-gray-600">Total Expenses</h2>
+                    <p id="total-expenses" class="text-3xl font-bold text-red-600">$0.00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Add Expense Form -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Add New Expense</h2>
+                <form id="expense-form" class="space-y-4">
+                    <div>
+                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                        <input type="text" id="description" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
+                        <input type="number" id="amount" required min="0" step="0.01"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                        <select id="category" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            <option value="food">Food</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200">
+                        Add Expense
+                    </button>
+                </form>
+            </div>
+
+            <!-- Expense List -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Expense History</h2>
+                <div id="expense-list" class="space-y-4">
+                    <!-- Expenses will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize expenses from localStorage or empty array
+        let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+        
+        // DOM Elements
+        const expenseForm = document.getElementById('expense-form');
+        const expenseList = document.getElementById('expense-list');
+        const balanceElement = document.getElementById('balance');
+        const totalExpensesElement = document.getElementById('total-expenses');
+
+        // Update UI
+        function updateUI() {
+            // Clear expense list
+            expenseList.innerHTML = '';
+            
+            // Calculate total expenses
+            const totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+            
+            // Update balance and total expenses
+            balanceElement.textContent = `$${totalExpenses.toFixed(2)}`;
+            totalExpensesElement.textContent = `$${totalExpenses.toFixed(2)}`;
+            
+            // Render expenses
+            expenses.forEach((expense, index) => {
+                const expenseElement = document.createElement('div');
+                expenseElement.className = 'flex justify-between items-center p-4 bg-gray-50 rounded-lg';
+                expenseElement.innerHTML = `
+                    <div>
+                        <h3 class="font-semibold">${expense.description}</h3>
+                        <p class="text-sm text-gray-600">${expense.category}</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="font-semibold text-red-600">$${expense.amount.toFixed(2)}</span>
+                        <button onclick="deleteExpense(${index})" class="text-red-500 hover:text-red-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                `;
+                expenseList.appendChild(expenseElement);
+            });
+        }
+
+        // Add expense
+        expenseForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const description = document.getElementById('description').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const category = document.getElementById('category').value;
+            
+            const expense = {
+                description,
+                amount,
+                category,
+                date: new Date().toISOString()
+            };
+            
+            expenses.push(expense);
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+            
+            updateUI();
+            expenseForm.reset();
+        });
+
+        // Delete expense
+        function deleteExpense(index) {
+            expenses.splice(index, 1);
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+            updateUI();
+        }
+
+        // Initial UI update
+        updateUI();
+    </script>
+</body>
+</html> 
