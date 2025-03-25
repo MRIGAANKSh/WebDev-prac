@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
+#box{
+    height: 100px;
+    width: 100px;
+    background-color: crimson;
+}
+
+#box2{
+    height: 100px;
+    width: 100px;
+    background-color: rgb(0, 0, 0);
+}
+
+h1{
+    color: brown;
+}
+#box3{
+    height: 100px;
+    width: 100px;
+    background-color: rgb(236, 139, 139);
+}
