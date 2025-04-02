@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+
+.marque{
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 3vw;
+    padding: 0 1.5vw;
+}
+
+
+#page1{
+    background-color: red;
+    height: 100%;
+    width: 100%;
+}
+
+#page3{
+    background-color: red;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+#move{
+    background-color: lawngreen;
+    display: flex;
+    padding: 3vw 0;
+    
+}
+
+
+#move h1{
+    font-size: 30px;
+}
+#move img{
+    height: 20px;
+}
