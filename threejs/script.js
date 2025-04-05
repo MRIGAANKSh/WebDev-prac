@@ -32,8 +32,9 @@ let box=new THREE.BoxGeometry(1,1,1);
 let material=new THREE.MeshBasicMaterial({color:0x00ff00});
 let mesh=new THREE.Mesh(box,material);
 
-mesh.rotation.y=1.22
-mesh.scale.z=2
+// mesh.rotation.y=Math.PI/4
+// mesh.rotation.x=Math.PI/4
+// mesh.scale.z=2
 
 
 
@@ -42,3 +43,12 @@ const canvas=document.querySelector("#draw")
 const renderer = new THREE.WebGLRenderer({canvas});
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.render(scene,camera)
+
+function animate(){
+    window.requestAnimationFrame(animate);
+    renderer.render(scene,camera);
+    mesh.rotation.y+=0.01
+    
+
+}
+animate()
