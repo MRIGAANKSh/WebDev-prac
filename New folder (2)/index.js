@@ -29,6 +29,22 @@ app.get('/file/:filename',function(req,res){
     })
 })
 
+app.get('/edit/:filename',function(req,res){
+    res.render('edit',{filename:req.params.filename})
+})
+
+
+app.get('/data/:filename',function(req,res){
+   fs.readFile(`./files/${req.params.filename}`,"utf-8",function(err,filedata){
+        if(err){
+            console.log(err);
+        }
+        res.render('data',{filename:req.params.filename,data:filedata});
+
+
+    })
+})
+
 app.post('/create',function(req,res){
     fs.writeFile(`./files/${req.body.title.split(' ').join('')}.txt`,req.body.details,function(err){
         if(err){
@@ -41,5 +57,28 @@ app.post('/create',function(req,res){
         }
     })
 })
+
+
+app.post('/edit',function(req,res){
+    //console.log(req.body)
+    fs.rename(`./files/${req.body.previous}`,`./files/${req.body.name}.txt`,function(err){
+        if(err){
+            console.log("error changin name")
+        }
+        res.redirect('/')
+    })
+})
+
+app.post('/data',function(req,res){
+    console.log("data come");
+    fs.writeFile(`./files/${req.body.name}`,`${req.body.newdata}`,function(err){
+        if(err){
+            console.log('err')
+        }
+        res.redirect('/')
+    })
+    console.log(`${req.body.newdata}`)
+})
+
 
 app.listen(3000)
