@@ -1,0 +1,33 @@
+mongo db dbms 
+
+Data Storage:
+             aisa kuch data stroe krne ke lie ye use hota hai binary data files field store hota hai ..
+
+Types:
+DBS:
+
+SQL|| NOSQl
+
+Sql-structured query lanh---data ke ek roop me rhkna like tables ..
+
+NoSql-not only Sql
+--objects hote hai ..
+--obj me data hota hai
+mongo db...-NoSql
+
+terminilogies...
+
+backend me do server hote hai app server and db server..
+
+app server---node server
+db server--- 
+
+Database->collection->Document->
+CODE 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+CODE
+mongoose.connect->database create
+model create-> collection
+CREATE code -> document
