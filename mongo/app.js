@@ -81,6 +81,20 @@ app.get('/delete/:id',async function(req,res){
 })
 
 
+app.get('/edit/:userid',async function(req,res){
+    let allusers=await usermodel.findOne({_id:req.params.userid});
+    res.render("edit",{allusers})
+})
+
+app.post('/update/:userid',async function(req,res){
+    let {name,email,image}=req.body;
+    let updateuser=await usermodel.findOneAndUpdate({_id:req.params.userid},
+        {name:name,
+        email:email,
+        image:image},{new:true})
+
+    res.redirect('/read')
+})
 
 app.listen(3000,function(req,res){
     console.log("workign good")
