@@ -1,0 +1,16 @@
+auth to check it is real or not 
+
+authprixation aurtoruze hai ya krne le liye 
+
+sabse phele hmein kuch chize sikhni hai alg alg 
+
+
+1-cokkie kaise set krte hai 
+2-brcyt how to use 
+fro pwd encryption and decryption .
+3-jwt kya hai
+
+$2b$10$1TK8CbhARpYZbUquRVFv0enOyw5P785MvYuPAdT5Mj.S8JB2HxKoa
+
+
+jwt-json web tokens
