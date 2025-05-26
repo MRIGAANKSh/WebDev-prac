@@ -4,8 +4,9 @@ const router=express.Router();
 const ownermodel=require('../models/owners-model')
 
 
-router.get('/',function(req,res){
-    res.send("hello its owners")
+router.get('/admin',function(req,res){
+    let success=req.flash("success")
+    res.render("createproducts",{success});
 })
 
 
