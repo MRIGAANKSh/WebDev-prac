@@ -1,0 +1,28 @@
+import { useState } from "react"
+
+//let Counter=15
+
+
+function App(){
+  let [Counter,setCounter]=useState(0);
+  const addvalue=()=>{
+  setCounter(Counter+1)
+}
+const removevalue=()=>{
+  setCounter(Counter-1)
+}
+  return (
+    
+    <>
+    <h1>React Counter Project</h1>
+    <h2>Counter value:</h2>
+    <button onClick={addvalue}>Add Value:</button>{Counter}
+    <button onClick={removevalue}>Remove Value:</button>
+    <p>footer: {Counter}</p>
+    </>
+  )
+  
+}
+
+
+export default App
