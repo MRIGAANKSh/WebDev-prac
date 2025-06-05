@@ -4,3 +4,8 @@ react install krta hai modules ko sath but vite files laata hai uske baad npm is
 
 
 vite bare min req to run ohk boi
+
+
+//theory--react
+
+react-hooks 

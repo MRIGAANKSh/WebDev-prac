@@ -1,24 +1,20 @@
 import { useState } from "react"
-
+import Card from "./componets/card"
 //let Counter=15
 
 
 function App(){
-  let [Counter,setCounter]=useState(0);
-  const addvalue=()=>{
-  setCounter(Counter+1)
-}
-const removevalue=()=>{
-  setCounter(Counter-1)
-}
+ let username="mrigaank sharma"
   return (
     
     <>
-    <h1>React Counter Project</h1>
-    <h2>Counter value:</h2>
-    <button onClick={addvalue}>Add Value:</button>{Counter}
-    <button onClick={removevalue}>Remove Value:</button>
-    <p>footer: {Counter}</p>
+    <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+  <h1 className="text-7xl font-extrabold p-5 text-amber-900 ">My name is {username}</h1>
+    <Card username="mrigaank sharma"/>
+    <Card username="sushil sharma"/>
+    <Card />
     </>
   )
   
