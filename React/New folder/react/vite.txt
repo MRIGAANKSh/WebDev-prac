@@ -1,0 +1,12 @@
+vite is bunlder for react
+
+react install krta hai modules ko sath but vite files laata hai uske baad npm istall krle jaake
+
+
+vite bare min req to run ohk boi
+
+
+//theory--react
+
+react-hooks 
+
