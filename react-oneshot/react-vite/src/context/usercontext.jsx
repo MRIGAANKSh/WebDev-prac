@@ -1,9 +1,6 @@
 import { createContext } from "react"
 export  const DataContext=createContext()
 function UserContext({children}){
-
-   
-
     const username="mrigaank sharma"
     return (
         <>

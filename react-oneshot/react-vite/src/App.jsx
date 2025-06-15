@@ -1,21 +1,24 @@
-//react router dom 
-
-import { useContext } from "react";
-import { DataContext } from "./context/usercontext";
-
+import axios from "axios"
 
 function App(){
+  // const data=async ()=>{
+  //   await fetch('https://jsonplaceholder.typicode.com/todos/1')
+  //     .then(response => response.json())
+  //     .then(json => console.log(json))
+  // }
 
-  const data=useContext(DataContext)
-  return (
-    <>
-    <div className="w-full flex justify-center items-center  min-h-screen bg-black text-white">
-     
-<h1 className="text-3xl">{data}</h1>
-      
-      </div>
-    </>
-  )
+  // const data=async ()=>{
+  //   const data=await axios.get('https://jsonplaceholder.typicode.com/todos/150')
+  //   console.log(data.data)
+  // }
+
+  // return(
+  //   <>
+  //     <button onClick={data} className="p-10 bg-yellow-400 m-5 ">Click me</button>
+  //   </>
+  // )
+  
+
 }
 
 export default App;
