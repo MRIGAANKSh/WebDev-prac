@@ -1,58 +1,28 @@
-import { useEffect, useState } from "react";
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from './redux/counter/counterslice'
 
-//counter-- projetc by mine ohk
-
-function App(){
-  const [count,setCounter]=useState(0);
-
-  const counter=()=>{
-    setCounter(count+1)
-  }
-
-  const Decrement=()=>{
-    if(count<=0){
-      setCounter(0)
-    }
-    else{
-       setCounter(count-1);
-    }
-   
-  }
-
-  useEffect(()=>{
-    counter
-  },[count])
+export default function App() {
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
 
   return (
-     <div className="w-full min-h-screen bg-black flex items-center justify-center">
+    <div>
       <div>
-        
         <button
-        onClick={() => {
-         counter()
-        }}
-        className="p-5 m-5 bg-yellow-400 border-amber-200 text-black rounded-xl 
-                   transform scale-100 hover:scale-110 active:scale-95 
-                   transition duration-300 ease-in-out"
-      >
-        {count}
-        
-      </button>
-      <button
-        onClick={() => {
-          Decrement()
-        }}
-        className="p-5 m-5 bg-yellow-400 border-amber-200 text-black rounded-xl 
-                   transform scale-100 hover:scale-110 active:scale-95 
-                   transition duration-300 ease-in-out"
-      >
-       {count}
-      </button>
+          aria-label="Increment value"
+          onClick={() => dispatch(increment())}
+        >
+          Increment
+        </button>
+        <span>{count}</span>
+        <button
+          aria-label="Decrement value"
+          onClick={() => dispatch(decrement())}
+        >
+          Decrement
+        </button>
       </div>
-      
     </div>
   )
 }
-
-export default App;
-
