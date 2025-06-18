@@ -5,3 +5,5 @@ export const store = configureStore({
     counter: counterReducer,
   },
 })
+
+//reducre will tell store what to do when there is change of state ohk  reducer ek fucntion hai jo hum bnae the hai ohk
