@@ -7,7 +7,7 @@ import { store } from './redux/store.js'
 import { Provider } from 'react-redux'
 
 
-
+//provider se wrap krdo puri prohject ko jo ki store hai provider jiske andr sab kuch hai 
 createRoot(document.getElementById('root')).render(
   
 
