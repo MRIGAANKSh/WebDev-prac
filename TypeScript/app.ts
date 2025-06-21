@@ -35,3 +35,9 @@ var a=[1,2,3];
 var b=a;
 b[0]=5
 console.log(b,a);
+
+
+
+var k :[string,number]=["number",1];
+console.log(a);
+//an array of string and number
