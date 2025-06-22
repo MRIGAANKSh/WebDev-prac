@@ -31,7 +31,25 @@
 
 //{} [] () ye references hai changes parent me hoge changes....
 
-var a=[1,2,3];
-var b=a;
-b[0]=5
-console.log(b,a);
+// var a=[1,2,3];
+// var b=a;
+// b[0]=5
+// console.log(b,a);
+
+
+
+// var k :[string,number]=["number",1];
+// console.log(a);
+// //an array of string and number
+
+
+
+
+//TYpe ineference....
+// int b=12;
+// let a:number|string;
+
+
+//type annotations
+//function(a:number,b:number)
+
