@@ -17,7 +17,24 @@
 //12 23-number , p o l i c e-char , police-string , true false -boolean
 //primitive and references
 //{} [] () ye references hai changes parent me hoge changes....
-var a = [1, 2, 3];
-var b = a;
-b[0] = 5;
-console.log(b, a);
+// var a=[1,2,3];
+// var b=a;
+// b[0]=5
+// console.log(b,a);
+// var k :[string,number]=["number",1];
+// console.log(a);
+// //an array of string and number
+//TYpe ineference....
+// int b=12;
+// let a:number|string;
+//type annotations
+//function(a:number,b:number)
+var A = /** @class */ (function () {
+    function A(name) {
+        this.name = name;
+        this.name = name;
+    }
+    return A;
+}());
+var k = new A("mrigaank");
+console.log(k.name);
