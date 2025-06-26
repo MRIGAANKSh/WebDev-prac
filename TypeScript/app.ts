@@ -53,3 +53,11 @@
 //type annotations
 //function(a:number,b:number)
 
+class A{
+    constructor(public name:string){
+        this.name=name;
+    }
+}
+
+const k=new A("mrigaank");
+console.log(k.name);
