@@ -1,57 +1,50 @@
 "use client";
+import axios from "axios";
+import Link from "next/link";
+import React, {useState} from "react";
+import {toast} from "react-hot-toast";
+import {useRouter} from "next/navigation";
 
-import React, { useEffect, useState } from "react";
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<{ username: string; email: string } | null>(null);
-  const [loading, setLoading] = useState(true);
+    const router = useRouter()
+    const [data, setData] = useState("nothing")
+    const logout = async () => {
+        try {
+            await axios.get('/api/users/logout')
+            toast.success('Logout successful')
+            router.push('/login')
+        } catch (error:any) {
+            console.log(error.message);
+            toast.error(error.message)
+        }
+    }
 
-  useEffect(() => {
-    // Simulate API call to get user data
-    const fetchUser = async () => {
-      try {
-        const response = await fetch("/api/profile"); // Replace with your actual API
-        const data = await response.json();
-        setUser(data);
-      } catch (error) {
-        console.error("Failed to load user profile:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const getUserDetails = async () => {
+        const res = await axios.get('/api/users/me')
+        console.log(res.data);
+        setData(res.data.data._id)
+    }
 
-    fetchUser();
-  }, []);
-
-  if (loading) {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center">
-        <p className="text-lg font-semibold">Loading profile...</p>
-      </div>
-    );
-  }
+        <div className="flex flex-col items-center justify-center min-h-screen py-2">
+            <h1>Profile</h1>
+            <hr />
+            <p>Profile page</p>
+            <h2 className="p-1 rounded bg-green-500">{data === 'nothing' ? "Nothing" : <Link href={`/profile/${data}`}>{data}
+            </Link>}</h2>
+        <hr />
+        <button
+        onClick={logout}
+        className="bg-blue-500 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >Logout</button>
 
-  if (!user) {
-    return (
-      <div className="w-full min-h-screen flex items-center justify-center">
-        <p className="text-lg font-semibold text-red-600">User not found or not logged in.</p>
-      </div>
-    );
-  }
+        <button
+        onClick={getUserDetails}
+        className="bg-green-800 mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >GetUser Details</button>
 
-  return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-md max-w-md w-full">
-        <h1 className="text-3xl font-bold mb-6 text-center">Profile</h1>
-        <div className="text-lg">
-          <p className="mb-2">
-            <strong>Username:</strong> {user.username}
-          </p>
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+
+            </div>
+    )
 }
