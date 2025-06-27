@@ -4,11 +4,10 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import toast from "react-hot-toast"
+import { toast } from "react-hot-toast";
 
-export default function Signuppage() {
+export default function SignupPage() {
   const router = useRouter();
-
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -22,13 +21,12 @@ export default function Signuppage() {
     try {
       setLoading(true);
       const response = await axios.post("/api/users/signup", user);
+      console.log("Signup success", response.data);
       toast.success("Signup successful!");
-      console.log("Signup successful:", response.data);
-      router.push("/login"); // Redirect to login
+      router.push("/login");
     } catch (error: any) {
-      toast.error("Signup no Performed")
-      console.error("Signup failed:", error);
-      alert(error.response?.data?.error || "Signup failed");
+      console.error("Signup failed", error.message);
+      toast.error(error.response?.data?.error || error.message);
     } finally {
       setLoading(false);
     }
@@ -40,66 +38,64 @@ export default function Signuppage() {
   }, [user]);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center">
-      <div className="p-8 rounded-xl shadow-lg  w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center">Sign Up</h1>
+    <div className="flex items-center justify-center min-h-screen text-white px-4">
+      <div className="w-full max-w-md  rounded-xl shadow-md p-8">
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          {loading ? "Processing..." : "Sign Up"}
+        </h1>
 
         <label htmlFor="username" className="block mb-1 font-medium">
           Username
         </label>
         <input
-          type="text"
           id="username"
+          type="text"
+          placeholder="Enter username"
           value={user.username}
           onChange={(e) => setUser({ ...user, username: e.target.value })}
-          placeholder="Enter username"
-          className="w-full p-3 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
+          className="w-full p-3 mb-4 border rounded-md focus:outline-none focus:border-blue-500 text-black"
         />
 
         <label htmlFor="email" className="block mb-1 font-medium">
           Email
         </label>
         <input
-          type="email"
           id="email"
+          type="email"
+          placeholder="Enter email"
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
-          placeholder="Enter email"
-          className="w-full p-3 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
+          className="w-full p-3 mb-4 border rounded-md focus:outline-none focus:border-blue-500 text-black"
         />
 
         <label htmlFor="password" className="block mb-1 font-medium">
           Password
         </label>
         <input
-          type="password"
           id="password"
+          type="password"
+          placeholder="Enter password"
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
-          placeholder="Enter password"
-          className="w-full p-3 mb-6 border rounded-md focus:outline-none focus:border-blue-500"
+          className="w-full p-3 mb-6 border rounded-md focus:outline-none focus:border-blue-500 text-black"
         />
 
         <button
           onClick={onSignup}
           disabled={buttonDisabled || loading}
-          className={`w-full text-white p-3 rounded-md transition duration-300 ${
+          className={`w-full p-3 rounded-md text-white transition duration-300 ${
             buttonDisabled || loading
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700"
           }`}
         >
-          {loading
-            ? "Signing up..."
-            : buttonDisabled
-            ? "Fill All Fields"
-            : "Sign Up"}
+          {loading ? "Signing up..." : "Sign Up"}
         </button>
 
-        <p className="text-sm mt-4 text-center">
+        <p className="mt-4 text-sm text-center">
           Already have an account?{" "}
           <Link href="/login" className="text-blue-600 hover:underline">
-            Log in
+            Login here
           </Link>
         </p>
       </div>
