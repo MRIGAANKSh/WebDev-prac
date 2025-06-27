@@ -1,56 +1,73 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Link from "next/link";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<{ username: string; email: string } | null>(null);
-  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+  const [userId, setUserId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Simulate API call to get user data
-    const fetchUser = async () => {
-      try {
-        const response = await fetch("/api/profile"); // Replace with your actual API
-        const data = await response.json();
-        setUser(data);
-      } catch (error) {
-        console.error("Failed to load user profile:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const logout = async () => {
+    try {
+      await axios.get("/api/users/logout");
+      toast.success("Logout successful");
+      router.push("/login");
+    } catch (error: any) {
+      console.error("Logout error:", error.message);
+      toast.error(error.message || "Logout failed");
+    }
+  };
 
-    fetchUser();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="w-full min-h-screen flex items-center justify-center">
-        <p className="text-lg font-semibold">Loading profile...</p>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div className="w-full min-h-screen flex items-center justify-center">
-        <p className="text-lg font-semibold text-red-600">User not found or not logged in.</p>
-      </div>
-    );
-  }
+  const getUserDetails = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get("/api/users/me");
+      setUserId(res.data.data._id);
+      toast.success("User data fetched");
+    } catch (error: any) {
+      console.error("User fetch error:", error.message);
+      toast.error(error.message || "Failed to get user details");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-md max-w-md w-full">
-        <h1 className="text-3xl font-bold mb-6 text-center">Profile</h1>
-        <div className="text-lg">
-          <p className="mb-2">
-            <strong>Username:</strong> {user.username}
-          </p>
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
-        </div>
+    <div className="flex flex-col items-center justify-center min-h-screen py-6 px-4 ">
+      <div className=" p-8 rounded-xl shadow-md w-full max-w-md text-center">
+        <h1 className="text-3xl font-bold mb-4">Profile</h1>
+        <p className="mb-4 text-gray-700">Welcome to your profile page.</p>
+
+        <h2 className="p-2 mb-4 rounded bg-green-100 text-green-700 text-sm break-all">
+          {userId ? (
+            <Link href={`/profile/${userId}`} className="hover:underline">
+              {userId}
+            </Link>
+          ) : (
+            "No user data yet"
+          )}
+        </h2>
+
+        <button
+          onClick={logout}
+          className="w-full bg-red-600 text-white font-semibold py-2 px-4 rounded hover:bg-red-700 mb-4 transition"
+        >
+          Logout
+        </button>
+
+        <button
+          onClick={getUserDetails}
+          disabled={loading}
+          className={`w-full ${
+            loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+          } text-white font-semibold py-2 px-4 rounded transition`}
+        >
+          {loading ? "Fetching..." : "Get User Details"}
+        </button>
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,55 +14,76 @@ export default function LoginPage() {
     password: "",
   });
 
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
+
   const onLogin = async () => {
     try {
-      const response = await axios.post("/api/login", user); // Adjust this route
-      console.log("Login successful:", response.data);
-      router.push("/dashboard"); // Redirect after login
-    } catch (error) {
-      console.error("Login failed:", error);
+      setLoading(true);
+      const response = await axios.post("/api/users/login", user);
+      toast.success("Login successful!");
+      router.push("/profile");
+    } catch (error: any) {
+      toast.error(error?.response?.data?.error || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
+  useEffect(() => {
+    setButtonDisabled(!(user.email && user.password));
+  }, [user]);
+
   return (
-    <div className="w-full min-h-screen flex justify-center items-center ">
-      <div className=" p-8 rounded-xl shadow-md w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
+    <div className="min-h-screen flex items-center justify-center bg-black text-white px-4">
+      <div className="w-full max-w-sm  p-8 rounded-xl shadow-lg">
+        <h1 className="text-3xl font-bold text-center mb-6">
+          {loading ? "Logging in..." : "Login"}
+        </h1>
 
-        <label htmlFor="email" className="block mb-1 font-medium">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-          placeholder="Enter email"
-          className="w-full p-3 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
-        />
+        <div className="mb-4">
+          <label htmlFor="email" className="block mb-1 font-medium">
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            value={user.email}
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            placeholder="Enter your email"
+            className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-        <label htmlFor="password" className="block mb-1 font-medium">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-          placeholder="Enter password"
-          className="w-full p-3 mb-6 border rounded-md focus:outline-none focus:border-blue-500"
-        />
+        <div className="mb-6">
+          <label htmlFor="password" className="block mb-1 font-medium">
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            value={user.password}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            placeholder="Enter your password"
+            className="w-full p-3 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
         <button
           onClick={onLogin}
-          className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-300"
+          disabled={buttonDisabled || loading}
+          className={`w-full py-3 rounded-md text-white font-semibold transition duration-300 ${
+            buttonDisabled || loading
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700"
+          }`}
         >
-          Login
+          {loading ? "Please wait..." : "Login"}
         </button>
 
         <p className="text-sm mt-4 text-center">
-          Don't have an account?{" "}
-          <Link href="/signup" className="text-blue-600 hover:underline">
+          Don&apos;t have an account?{" "}
+          <Link href="/signup" className="text-blue-400 hover:underline">
             Sign up
           </Link>
         </p>
