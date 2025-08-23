@@ -1,0 +1,4 @@
+#!/bin/bash
+
+tar -cf h.tar *.sh 2>>e.txt
+
