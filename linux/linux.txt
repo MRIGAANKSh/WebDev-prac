@@ -1,0 +1,39 @@
+#text file 
+
+ls - list the directory present in the dir ..
+ls -l -- list the dir in list format with the permission 
+like rwx read write executable ohk mrigaank
+
+d- stand for dir
+
+f-file or regular file 
+
+
+111-rwx 
+ 421-the stands for r-4 w-2 x-1
+ok this is it 
+
+there are also some command line editor
+sed nano awk 
+
+history -it is used to show all the prev command in the current instance 
+cd- it is used to change the dir 
+
+file system dir
+is 
+/bin
+/usr
+
+
+cat-to create a file with some input ok .. to concatenate two or more files into a single one . 
+to copy the content of one file to another file to display of the file,
+
+clear-it clear the terminal 
+
+
+commands here we go again
+
+ls -l or ll -long listing of file is done such as nature,size,etc meta data
+ls -a it showthe hidden files
+
+
