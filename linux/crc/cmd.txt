@@ -1,0 +1,18 @@
+
+## the commands of linux and SC
+
+touch :
+the touch cmd-to create an empty file or a latest instance of a file.
+it show the metadata of the file ,timestamps or last modified
+
+to work upon the timestamps 
+
+stat command :
+it show the stat of a file ok ..
+   
+question: to empty an instance of the file or to generate a file with empty instance 
+when file doesn't exist -file will be created .
+file exist ..
+
+touch will update the timestamps of the file .
+

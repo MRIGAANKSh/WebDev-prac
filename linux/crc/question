@@ -1,0 +1,21 @@
+write a command to create file with file name and provide the content as your basics details as a std 
+
+
+write a command to show the data of the above file?
+write a cmd to print the text of the file in rev order?
+write a cmd to concatenate two or more file into a single one?
+write a cmd to copy a data of one file to another one ?
+write a cmd to display the content of the file in rev order?(bottom to top approach
+-tac cmd is used hint..
+
+
+
+
+
+cat > mrigaank.txt
+cat >> mrigaank.txt 
+
+CTRL +D
+this is file 
+my name is mrigaank sharma 2302900100147
+my college is abesit 

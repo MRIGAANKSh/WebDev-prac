@@ -1,0 +1,14 @@
+total 8
+-rw-r--r-- 1 pc 197609   0 Aug 16 14:36 a.txt
+-rw-r--r-- 1 pc 197609  48 Aug 16 14:48 k.txt
+-rwxr-xr-x 1 pc 197609 138 Aug 16 14:58 l.sh*
+-rw-r--r-- 1 pc 197609  58 Aug 16 14:51 m.txt
+-rw-r--r-- 1 pc 197609   0 Aug 25 16:02 mrigaank.txt
+-rw-r--r-- 1 pc 197609  93 Aug 16 14:51 names.txt
+-rw-r--r-- 1 pc 197609 157 Aug 16 14:59 p.txt
+-rw-r--r-- 1 pc 197609  48 Aug 16 14:39 sample.txt
+-rwxr-xr-x 1 pc 197609 130 Aug 16 14:48 script.sh*
+drwxr-xr-x 1 pc 197609   0 Aug 16 14:07 split/
+-rw-r--r-- 1 pc 197609  44 Aug 16 14:42 t.txt
+drwxr-xr-x 1 pc 197609   0 Aug 16 14:07 test/
+drwxr-xr-x 1 pc 197609   0 Aug 16 14:07 train/
