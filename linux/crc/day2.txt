@@ -1,0 +1,6 @@
+cp-copy cmd
+mkdir-mkdir cmd 
+nano-editor
+mkdir -p dir/dir2-hir create krta hai
+
+

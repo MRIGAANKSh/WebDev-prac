@@ -1,0 +1,12 @@
+to display the timestamps of the given file
+stat is used
+
+
+question-to update the acess time of a given file
+touch -a for acess time 
+
+to update the modified time of the given file 
+touch -m for modified time 
+case sensitive
+
+history--ques-- write a cmd to show the all the used cmd used in the session 
