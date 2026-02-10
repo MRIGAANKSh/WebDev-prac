@@ -1,0 +1,19 @@
+1.txt:           ASCII text, with CRLF line terminators
+2.txt:           ASCII text, with CRLF line terminators
+3.txt:           ASCII text, with very long lines (341), with CRLF line terminators
+4.txt:           empty
+crc:             directory
+DirectoryA:      directory
+DirectoryB:      directory
+DirectoryC:      directory
+DirectoryD:      directory
+DirectoryE:      directory
+final_linux.txt: empty
+linux:           directory
+linux.ttx:       empty
+linux.txt:       ASCII text
+Mks:             directory
+mrigaanksharma:  directory
+question:        ASCII text
+script.sh:       ASCII text
+scritp.sh:       Bourne-Again shell script, ASCII text executable
